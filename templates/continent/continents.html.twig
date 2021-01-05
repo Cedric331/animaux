@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ContinentController!{% endblock %}
+
+{% block body %}
+<h1 class="border border-dark rounded bg-primary text-white">{% block titre %}Liste des Continents!{% endblock %}</h1>
+
+
+   <div class="container">
+      <table class="table">
+         <thead>
+            <tr>
+               <th scope="col">Nom</th>
+            </tr>
+         </thead>
+         <tbody>
+         {% for continent in continents %}
+            <tr>
+               <td class="col-1"><a href="{{path('continent',{ 'id':continent.id }) }}">{{continent.libelle}}</a></td>
+            </tr>
+         {% endfor %}
+         </tbody>
+      </table>
+   </div>
+
+{% endblock %}

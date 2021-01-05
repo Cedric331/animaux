@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Animaux!{% endblock %}
+
+{% block body %}
+
+<h1 class="border border-dark rounded bg-primary text-white">{% block titre %}Page du {{animal.name}}{% endblock %}</h1>
+<div class="example-wrapper">
+
+   <div class="container">
+      <table class="table">
+         <thead>
+            <tr>
+               <th scope="col">Image</th>
+               <th scope="col">Description</th>
+               <th scope="col">Nom</th>
+               <th scope="col">Poids</th>
+               <th scope="col">Continents</th>
+               <th scope="col">Famille</th>
+               <th scope="col">Danger</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td class="col-3">
+                  <img src="{{asset(animal.image)}}">
+               </td>
+               <td class="col-2">{{animal.name}}</td>
+               <td class="col-2">{{animal.description}}</td>
+               <td class="col-2">{{animal.poids}} Kg</td>
+               <td class="col-3">
+               {% for continent in animal.continents %}
+                  <a class="btn btn-warning mt-1" href="{{path('continent',{ 'id':continent.id }) }}">{{continent.libelle}}</a>
+               {% endfor %}
+               </td>
+               <td class="col-1"><a href="{{path('famille_show',{ 'id':animal.famille.id }) }}">{{animal.famille.libelle}}</a></td>
+               <td class="col-1">
+               {% if(animal.danger) %}
+                  Animal dangereux
+               {% else %}
+                  Animal non dangereux
+               {% endif %}
+               </td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+</div>
+{% endblock %}

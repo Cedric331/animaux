@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Familles{% endblock %}
+
+{% block body %}
+<h1 class="border border-dark rounded bg-primary text-white">{% block titre %}Liste des Familles!{% endblock %}</h1>
+
+<div class="example-wrapper">
+   <div class="container">
+
+   {% for famille in familles %}
+   <hr class="my-5">
+      <table class="table">
+         <thead>
+            <tr>
+               <th scope="col">Libelle</th>
+               <th scope="col">Description</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td class="col-2"><a href="{{path('famille_show',{ 'id':famille.id }) }}">{{famille.libelle}}</a></td>
+               <td class="col-2">{{famille.description}}</td>
+            </tr>
+         </tbody>
+      </table>
+
+            <table class="table">
+         <thead>
+            <tr>
+               <th scope="col">Image</th>
+               <th scope="col">Description</th>
+               <th scope="col">Nom</th>
+               <th scope="col">Poids</th>
+               <th scope="col">Famille</th>
+               <th scope="col">Danger</th>
+            </tr>
+         </thead>
+         <tbody>
+         {% for animal in famille.animaux %}
+            <tr>
+               <td class="col-2">
+                  <img src="{{asset(animal.image)}}">
+               </td>
+               <td class="col-2"><a href="{{path('animaux_show',{ 'id':animal.id }) }}">{{animal.name}}</a></td>
+               <td class="col-2">{{animal.description}}</td>
+               <td class="col-2">{{animal.poids}} Kg</td>
+               <td class="col-2">{{animal.famille.libelle}}</td>
+               <td class="col-2">
+               {% if(animal.danger) %}
+                  Animal dangereux
+               {% else %}
+                  Animal non dangereux
+               {% endif %}
+               </td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+      
+
+   {% endfor %}
+
+   </div>
+</div>
+
+{% endblock %}

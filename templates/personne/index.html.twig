@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personnes!{% endblock %}
+
+{% block body %}
+
+<h1 class="border border-dark rounded bg-primary text-white">{% block titre %}Liste des Personnes!{% endblock %}</h1>
+<div class="example-wrapper">
+
+   <div class="container">
+      <table class="table">
+         <thead>
+            <tr>
+               <th scope="col">Nom</th>
+               <th scope="col">Animaux</th>
+            </tr>
+         </thead>
+         <tbody>
+         {% for personne in personnes %}
+            <tr>
+            <td class="col-1">
+               <a href="{{path('personne',{ 'id':personne.id }) }}">{{personne.nom}}</a>
+            </td>
+            <td>
+               {% for dispose in personne.disposes %}
+               <a href="{{ path('animaux_show', {'id': dispose.animal.id})}}">
+               <img src="{{dispose.animal.image}}" />
+               </a>               {% endfor %}
+            </td>
+            </tr>
+         {% endfor %}
+         </tbody>
+      </table>
+   </div>
+</div>
+{% endblock %}

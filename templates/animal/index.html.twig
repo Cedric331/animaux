@@ -12,22 +12,37 @@
          <thead>
             <tr>
                <th scope="col">Image</th>
-               <th scope="col">Description</th>
                <th scope="col">Nom</th>
+               <th scope="col">Description</th>
                <th scope="col">Poids</th>
+               <th scope="col">Continent</th>
+               <th scope="col">Famille</th>
+               <th scope="col">Personne</th>
                <th scope="col">Danger</th>
             </tr>
          </thead>
          <tbody>
          {% for animal in animaux %}
             <tr>
-               <td class="col-3">
+               <td class="col-2">
                   <img src="{{asset(animal.image)}}">
                </td>
-               <td class="col-2">{{animal.name}}</td>
-               <td class="col-3">{{animal.description}}</td>
-               <td class="col-2">{{animal.poids}} Kg</td>
-               <td class="col-2">
+               <td class="col-1"><a href="{{path('animaux_show',{ 'id':animal.id }) }}">{{animal.name}}</a></td>
+               <td class="col-1">{{animal.description}}</td>
+               <td class="col-1">{{animal.poids}} Kg</td>
+               <td class="col-3">
+               {% for continent in animal.continents %}
+                  <a class="btn btn-warning mt-1" href="{{path('continent',{ 'id':continent.id }) }}">{{continent.libelle}}</a>
+               {% endfor %}
+               </td>
+               <td class="col-2"><a href="{{path('famille_show',{ 'id':animal.famille.id }) }}">{{animal.famille.libelle}}</a></td>
+               <td class="col-1">
+               {% for dispose in animal.disposes%}
+                  {{dispose.personne.nom}}
+               {% endfor %}
+               </td>
+               
+               <td class="col-1">
                {% if(animal.danger) %}
                   Animal dangereux
                {% else %}

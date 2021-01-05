@@ -16,7 +16,7 @@ class AnimalController extends AbstractController
    {
       $this->repository = $repository;
    }
-   
+
     /**
      * @Route("/", name="animaux")
      */
@@ -26,6 +26,17 @@ class AnimalController extends AbstractController
       
       return $this->render('animal/index.html.twig', [
            'animaux' => $animaux
+        ]);
+    }
+
+
+      /**
+     * @Route("/animal/{id}", name="animaux_show")
+     */
+    public function show(Animal $animal): Response
+    {      
+      return $this->render('animal/show.html.twig', [
+           'animal' => $animal
         ]);
     }
 }

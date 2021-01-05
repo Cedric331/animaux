@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ContinentController!{% endblock %}
+
+{% block body %}
+<h1 class="border border-dark rounded bg-primary text-white">{% block titre %}Animaux du continent {{continent.libelle}}!{% endblock %}</h1>
+
+
+   <div class="container">
+      <table class="table">
+         <thead>
+            <tr>
+               {% for animal in animaux %}
+               <th class="col-auto">
+               <a href="{{ path('animaux_show', {'id': animal.id})}}">
+               <img src="{{animal.image}}" />
+               </a>
+               </th>
+               {% endfor %}
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+            {% for animal in animaux %}
+                     <td class="col-1">
+                      {% for continents in animal.continents %}
+                           {% if continents.libelle != continent.libelle %}
+                        <a class="btn btn-success mt-1" href="{{ path('continent', {'id': continents.id})}}">
+                        {{continents.libelle}}
+                        </a>
+                           {% endif %}
+                     {% endfor %}
+                     </td>
+               {% endfor %}            
+            </tr>
+         </tbody>
+      </table>
+   </div>
+
+{% endblock %}
