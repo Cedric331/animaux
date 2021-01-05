@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Animaux!{% endblock %}
+
+{% block body %}
+
+<h1 class="border border-dark rounded bg-primary text-white">{% block titre %}Animaux!{% endblock %}</h1>
+<div class="example-wrapper">
+
+   <div class="container">
+      <table class="table">
+         <thead>
+            <tr>
+               <th scope="col">Image</th>
+               <th scope="col">Description</th>
+               <th scope="col">Nom</th>
+               <th scope="col">Poids</th>
+               <th scope="col">Danger</th>
+            </tr>
+         </thead>
+         <tbody>
+         {% for animal in animaux %}
+            <tr>
+               <td class="col-3">
+                  <img src="{{asset(animal.image)}}">
+               </td>
+               <td class="col-2">{{animal.name}}</td>
+               <td class="col-3">{{animal.description}}</td>
+               <td class="col-2">{{animal.poids}} Kg</td>
+               <td class="col-2">
+               {% if(animal.danger) %}
+                  Animal dangereux
+               {% else %}
+                  Animal non dangereux
+               {% endif %}
+               </td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
+</div>
+{% endblock %}
